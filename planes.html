@@ -73,7 +73,7 @@
 
         /* Secciones */
         .section {
-            padding: 4rem 0; /* Reducido para menos espacio */
+            padding: 4rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -101,21 +101,22 @@
         .btn-cta {
             background: var(--button-bg);
             color: #FFF;
-            padding: 1rem 2.5rem;
+            padding: 0.75rem 2rem;
             border-radius: 8px;
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             font-weight: 700;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 10px var(--shadow);
         }
 
         .btn-cta:hover {
             background: var(--button-hover);
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px var(--shadow);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px var(--shadow);
         }
 
         /* Promo Banner */
@@ -129,42 +130,26 @@
             margin-bottom: 2rem;
         }
 
-        /* Acordeón */
-        .accordion-item {
+        /* Tarjetas de Planes */
+        .plan-card {
             background: var(--card-bg);
             border-radius: 12px;
-            margin-bottom: 1rem; /* Reducido para menos espacio entre items */
+            padding: 2rem;
             box-shadow: 0 10px 20px var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 2rem;
         }
 
-        .accordion-header {
-            padding: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            padding: 0 1.5rem;
-            transition: max-height 0.3s ease;
-        }
-
-        .accordion-content.active {
-            padding: 1.5rem;
-        }
-
-        .toggle-btn {
-            font-size: 1.5rem;
-            color: var(--accent);
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
         }
 
         /* Imágenes de Planes */
         .plan-img {
-            width: 128px;
-            cursor: pointer;
+            width: 180px; /* Mayor tamaño para destacar */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
             transition: transform 0.3s ease;
         }
 
@@ -177,11 +162,13 @@
             text-decoration: line-through;
             color: #999;
             margin-right: 10px;
+            font-size: 1.1rem;
         }
 
         .price-new {
             color: var(--promo-color);
             font-weight: bold;
+            font-size: 1.75rem; /* Más grande para impacto */
         }
 
         /* Modal de Pago */
@@ -250,15 +237,29 @@
         footer {
             background: var(--text-dark);
             color: #FFF;
-            padding: 2rem 0; /* Reducido para menos espacio */
+            padding: 2rem 0;
         }
 
         /* Responsive */
+        @media (min-width: 768px) {
+            .plans-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .section { padding: 2rem 0; }
             .container { padding: 1.5rem; }
-            .btn-cta { width: 100%; padding: 1rem; }
-            .plan-img { width: 100px; }
+            .btn-cta {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+            }
+            .plan-img { width: 140px; }
+            .plan-card { padding: 1.5rem; }
+            .price-new { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -281,103 +282,88 @@
             <h2 class="font-bold mb-6">Escoge cómo recordarlos</h2>
             <p class="max-w-2xl mx-auto mb-8 text-lg">Todos los planes incluyen un QR de regalo. ¡Aprovecha el 50% OFF hasta el 15 de abril!</p>
 
-            <div class="accordion max-w-4xl mx-auto">
+            <div class="plans-grid">
                 <!-- Plan Huella Eterna -->
-                <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="accordion-header">
-                        <h3 class="font-semibold">Huella Eterna</h3>
-                        <span class="toggle-btn">+</span>
+                <div class="plan-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="font-semibold mb-4">Huella Eterna</h3>
+                    <p class="mb-4 text-lg">Un espacio digital simple y bonito para mantener sus recuerdos.</p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
+                        <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía corta</li>
+                        <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
+                        <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
+                        <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes de amor</li>
+                        <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
+                        <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase especial</li>
+                        <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
+                        <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                    </ul>
+                    <p class="price mb-4"><span class="price-old">S/ 100</span> <span class="price-new">S/ 50</span></p>
+                    <div class="mb-6">
+                        <p class="text-[var(--accent)] font-semibold text-lg">¡Incluye llavero QR de regalo!</p>
+                        <img src="llavero-corazon.jpg" alt="Llavero en forma de corazón" class="plan-img mx-auto mt-2" data-fullsrc="llavero-corazon.jpg">
                     </div>
-                    <div class="accordion-content">
-                        <p class="mb-4">Un espacio digital simple y bonito para mantener sus recuerdos.</p>
-                        <ul class="text-left space-y-2">
-                            <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
-                            <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía corta</li>
-                            <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
-                            <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
-                            <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes de amor</li>
-                            <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
-                            <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase especial</li>
-                            <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
-                            <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
-                        </ul>
-                        <p class="price mt-4 text-xl"><span class="price-old">S/ 100</span> <span class="price-new">S/ 50</span></p>
-                        <div class="mt-4">
-                            <p class="text-[var(--accent)] font-semibold">¡Incluye llavero QR de regalo!</p>
-                            <img src="llavero-corazon.jpg" alt="Llavero en forma de corazón" class="plan-img mx-auto mt-2" data-fullsrc="llavero-corazon.jpg">
-                        </div>
-                        <div class="flex justify-center gap-4 mt-6">
-                            <a href="https://manguitopmd.github.io/memorias/" target="_blank" class="btn-cta"><i class="fas fa-eye mr-2"></i> Ver Ejemplo</a>
-                            <button class="btn-cta select-plan" data-plan="Huella Eterna - S/ 50"><i class="fas fa-heart mr-2"></i> ¡Elige Este!</button>
-                        </div>
+                    <div class="flex justify-center gap-4">
+                        <a href="https://manguitopmd.github.io/memorias/" target="_blank" class="btn-cta"><i class="fas fa-eye mr-2"></i> Ver Ejemplo</a>
+                        <button class="btn-cta select-plan" data-plan="Huella Eterna - S/ 50"><i class="fas fa-heart mr-2"></i> ¡Elige Este!</button>
                     </div>
                 </div>
 
                 <!-- Plan Memorias Eternas -->
-                <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="accordion-header">
-                        <h3 class="font-semibold">Memorias Eternas</h3>
-                        <span class="toggle-btn">+</span>
+                <div class="plan-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="font-semibold mb-4">Memorias Eternas</h3>
+                    <p class="mb-4 text-lg">Un homenaje más completo para sus recuerdos especiales.</p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
+                        <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Título especial</li>
+                        <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía completa</li>
+                        <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
+                        <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
+                        <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes del corazón</li>
+                        <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
+                        <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum detallado</li>
+                        <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase significativa</li>
+                        <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
+                        <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
+                        <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                    </ul>
+                    <p class="price mb-4"><span class="price-old">S/ 140</span> <span class="price-new">S/ 70</span></p>
+                    <div class="mb-6">
+                        <p class="text-[var(--accent)] font-semibold text-lg">¡Incluye placa metálica QR de regalo!</p>
+                        <img src="placa-metalica.jpg" alt="Placa Metálica" class="plan-img mx-auto mt-2" data-fullsrc="placa-metalica.jpg">
                     </div>
-                    <div class="accordion-content">
-                        <p class="mb-4">Un homenaje más completo para sus recuerdos especiales.</p>
-                        <ul class="text-left space-y-2">
-                            <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
-                            <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Título especial</li>
-                            <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía completa</li>
-                            <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
-                            <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
-                            <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes del corazón</li>
-                            <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
-                            <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum detallado</li>
-                            <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase significativa</li>
-                            <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
-                            <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
-                            <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
-                        </ul>
-                        <p class="price mt-4 text-xl"><span class="price-old">S/ 140</span> <span class="price-new">S/ 70</span></p>
-                        <div class="mt-4">
-                            <p class="text-[var(--accent)] font-semibold">¡Incluye placa metálica QR de regalo!</p>
-                            <img src="placa-metalica.jpg" alt="Placa Metálica" class="plan-img mx-auto mt-2" data-fullsrc="placa-metalica.jpg">
-                        </div>
-                        <div class="flex justify-center gap-4 mt-6">
-                            <button class="btn-cta select-plan" data-plan="Memorias Eternas - S/ 70"><i class="fas fa-music mr-2"></i> ¡Elige Este!</button>
-                        </div>
+                    <div class="flex justify-center gap-4">
+                        <button class="btn-cta select-plan" data-plan="Memorias Eternas - S/ 70"><i class="fas fa-music mr-2"></i> ¡Elige Este!</button>
                     </div>
                 </div>
 
                 <!-- Plan Legado Infinito -->
-                <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
-                    <div class="accordion-header">
-                        <h3 class="font-semibold">Legado Infinito</h3>
-                        <span class="toggle-btn">+</span>
+                <div class="plan-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="font-semibold mb-4">Legado Infinito</h3>
+                    <p class="mb-4 text-lg">El homenaje más completo, con su voz y más recuerdos.</p>
+                    <ul class="text-left space-y-2 mb-6">
+                        <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
+                        <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Título único</li>
+                        <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía completa</li>
+                        <li><i class="fas fa-video text-[var(--accent)] mr-2"></i> Video especial</li>
+                        <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
+                        <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
+                        <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes emotivos</li>
+                        <li><i class="fas fa-microphone text-[var(--accent)] mr-2"></i> Grabaciones de voz</li>
+                        <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
+                        <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum completo</li>
+                        <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase única</li>
+                        <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
+                        <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
+                        <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                    </ul>
+                    <p class="price mb-4"><span class="price-old">S/ 300</span> <span class="price-new">S/ 150</span></p>
+                    <div class="mb-6">
+                        <p class="text-[var(--accent)] font-semibold text-lg">¡Incluye placa de mármol QR de regalo!</p>
+                        <img src="placa-marmol.jpg" alt="Placa de Mármol" class="plan-img mx-auto mt-2" data-fullsrc="placa-marmol.jpg">
                     </div>
-                    <div class="accordion-content">
-                        <p class="mb-4">El homenaje más completo, con su voz y más recuerdos.</p>
-                        <ul class="text-left space-y-2">
-                            <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
-                            <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Título único</li>
-                            <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía completa</li>
-                            <li><i class="fas fa-video text-[var(--accent)] mr-2"></i> Video especial</li>
-                            <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
-                            <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
-                            <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes emotivos</li>
-                            <li><i class="fas fa-microphone text-[var(--accent)] mr-2"></i> Grabaciones de voz</li>
-                            <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
-                            <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum completo</li>
-                            <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase única</li>
-                            <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
-                            <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
-                            <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
-                        </ul>
-                        <p class="price mt-4 text-xl"><span class="price-old">S/ 300</span> <span class="price-new">S/ 150</span></p>
-                        <div class="mt-4">
-                            <p class="text-[var(--accent)] font-semibold">¡Incluye placa de mármol QR de regalo!</p>
-                            <img src="placa-marmol.jpg" alt="Placa de Mármol" class="plan-img mx-auto mt-2" data-fullsrc="placa-marmol.jpg">
-                        </div>
-                        <div class="flex justify-center gap-4 mt-6">
-                            <button class="btn-cta select-plan" data-plan="Legado Infinito - S/ 150"><i class="fas fa-star mr-2"></i> ¡Elige Este!</button>
-                        </div>
+                    <div class="flex justify-center gap-4">
+                        <button class="btn-cta select-plan" data-plan="Legado Infinito - S/ 150"><i class="fas fa-star mr-2"></i> ¡Elige Este!</button>
                     </div>
                 </div>
             </div>
@@ -418,27 +404,6 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1200, once: true });
-
-        // Acordeón
-        document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                const toggle = header.querySelector('.toggle-btn');
-                const isActive = content.style.maxHeight;
-
-                document.querySelectorAll('.accordion-content').forEach(item => {
-                    item.style.maxHeight = null;
-                    item.previousElementSibling.querySelector('.toggle-btn').textContent = '+';
-                    item.classList.remove('active');
-                });
-
-                if (!isActive) {
-                    content.style.maxHeight = content.scrollHeight + 'px'; // Sin margen extra
-                    toggle.textContent = '−';
-                    content.classList.add('active');
-                }
-            });
-        });
 
         // Modal de Pago
         let selectedPlan = null;
