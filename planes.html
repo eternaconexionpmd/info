@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eterna Conexión - Elige un plan para crear un portal memorial digital con QR para tus seres queridos o mascotas.">
+    <meta name="keywords" content="memorial digital, QR, recuerdos, homenaje, mascotas, Eterna Conexión">
+    <title>Eterna Conexión - Elige tu Plan</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        :root {
+            --bg-light: #FDF8F2; /* Fondo suave y cálido */
+            --text-dark: #3A2E2E; /* Marrón oscuro elegante */
+            --accent: #8C552F; /* Tono cálido para detalles */
+            --button-bg: #5A3A2A; /* Botón cálido y sobrio */
+            --button-hover: #A66A3F; /* Hover más vibrante */
+            --card-bg: rgba(255, 250, 245, 0.95); /* Fondo sutil para tarjetas */
+            --shadow: rgba(0, 0, 0, 0.15);
+            --promo-color: #D9534F; /* Color promocional cálido */
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        h1 { font-size: 2.5rem; line-height: 1.1; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+        @media (min-width: 768px) {
+            h1 { font-size: 3.75rem; }
+            h2 { font-size: 2.5rem; }
+            h3 { font-size: 1.75rem; }
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .fade-in { animation: fadeInUp 1.2s ease forwards; }
+        .pulse { animation: pulse 2s infinite; }
+
+        /* Contenedor */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Secciones */
+        .section {
+            padding: 4rem 0; /* Reducido para menos espacio */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-light);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            z-index: 1;
+            filter: blur(2px);
+        }
+
+        .intro::before { background-image: url('fondo-hero.jpg'); }
+        .plans::before { background-image: url('fondo-cta.jpg'); }
+
+        /* Botón CTA */
+        .btn-cta {
+            background: var(--button-bg);
+            color: #FFF;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta:hover {
+            background: var(--button-hover);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        /* Promo Banner */
+        .promo-banner {
+            background: var(--promo-color);
+            color: #FFF;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            margin-bottom: 2rem;
+        }
+
+        /* Acordeón */
+        .accordion-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 1rem; /* Reducido para menos espacio entre items */
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+
+        .accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.5rem;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-content.active {
+            padding: 1.5rem;
+        }
+
+        .toggle-btn {
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        /* Imágenes de Planes */
+        .plan-img {
+            width: 128px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .plan-img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Precios */
+        .price-old {
+            text-decoration: line-through;
+            color: #999;
+            margin-right: 10px;
+        }
+
+        .price-new {
+            color: var(--promo-color);
+            font-weight: bold;
+        }
+
+        /* Modal de Pago */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--text-dark);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            color: #FFF;
+            font-family: 'Roboto', sans-serif;
+            position: relative;
+        }
+
+        /* Modal de Imagen */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        /* Botón Cerrar */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            color: #FFF;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: #FFF;
+            padding: 2rem 0; /* Reducido para menos espacio */
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section { padding: 2rem 0; }
+            .container { padding: 1.5rem; }
+            .btn-cta { width: 100%; padding: 1rem; }
+            .plan-img { width: 100px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Intro Section -->
+    <section class="section intro">
+        <div class="container" data-aos="fade-up">
+            <img src="logo-eterna-conexion.png" alt="Logo de Eterna Conexión" class="mx-auto w-32 mb-6 fade-in">
+            <h1 class="font-bold mb-6">Elige un plan para su recuerdo</h1>
+            <p class="max-w-3xl mx-auto mb-6 text-lg">Crea un portal digital para guardar los recuerdos de tus seres queridos o mascotas con un QR especial.</p>
+            <div class="promo-banner fade-in" data-aos="fade-up" data-aos-delay="200">
+                🎉 ¡50% OFF solo hasta el 15 de abril!
+            </div>
+        </div>
+    </section>
+
+    <!-- Plans Section -->
+    <section class="section plans">
+        <div class="container" data-aos="fade-up">
+            <h2 class="font-bold mb-6">Escoge cómo recordarlos</h2>
+            <p class="max-w-2xl mx-auto mb-8 text-lg">Todos los planes incluyen un QR de regalo. ¡Aprovecha el 50% OFF hasta el 15 de abril!</p>
+
+            <div class="accordion max-w-4xl mx-auto">
+                <!-- Plan Huella Eterna -->
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="accordion-header">
+                        <h3 class="font-semibold">Huella Eterna</h3>
+                        <span class="toggle-btn">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="mb-4">Un espacio digital simple y bonito para mantener sus recuerdos.</p>
+                        <ul class="text-left space-y-2">
+                            <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
+                            <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía corta</li>
+                            <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
+                            <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
+                            <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes de amor</li>
+                            <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
+                            <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase especial</li>
+                            <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
+                            <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                        </ul>
+                        <p class="price mt-4 text-xl"><span class="price-old">S/ 100</span> <span class="price-new">S/ 50</span></p>
+                        <div class="mt-4">
+                            <p class="text-[var(--accent)] font-semibold">¡Incluye llavero QR de regalo!</p>
+                            <img src="llavero-corazon.jpg" alt="Llavero en forma de corazón" class="plan-img mx-auto mt-2" data-fullsrc="llavero-corazon.jpg">
+                        </div>
+                        <div class="flex justify-center gap-4 mt-6">
+                            <a href="https://manguitopmd.github.io/memorias/" target="_blank" class="btn-cta"><i class="fas fa-eye mr-2"></i> Ver Ejemplo</a>
+                            <button class="btn-cta select-plan" data-plan="Huella Eterna - S/ 50"><i class="fas fa-heart mr-2"></i> ¡Elige Este!</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan Memorias Eternas -->
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="accordion-header">
+                        <h3 class="font-semibold">Memorias Eternas</h3>
+                        <span class="toggle-btn">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="mb-4">Un homenaje más completo para sus recuerdos especiales.</p>
+                        <ul class="text-left space-y-2">
+                            <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
+                            <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Título especial</li>
+                            <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía completa</li>
+                            <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
+                            <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
+                            <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes del corazón</li>
+                            <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
+                            <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum detallado</li>
+                            <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase significativa</li>
+                            <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
+                            <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
+                            <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                        </ul>
+                        <p class="price mt-4 text-xl"><span class="price-old">S/ 140</span> <span class="price-new">S/ 70</span></p>
+                        <div class="mt-4">
+                            <p class="text-[var(--accent)] font-semibold">¡Incluye placa metálica QR de regalo!</p>
+                            <img src="placa-metalica.jpg" alt="Placa Metálica" class="plan-img mx-auto mt-2" data-fullsrc="placa-metalica.jpg">
+                        </div>
+                        <div class="flex justify-center gap-4 mt-6">
+                            <button class="btn-cta select-plan" data-plan="Memorias Eternas - S/ 70"><i class="fas fa-music mr-2"></i> ¡Elige Este!</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan Legado Infinito -->
+                <div class="accordion-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="accordion-header">
+                        <h3 class="font-semibold">Legado Infinito</h3>
+                        <span class="toggle-btn">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p class="mb-4">El homenaje más completo, con su voz y más recuerdos.</p>
+                        <ul class="text-left space-y-2">
+                            <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
+                            <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Título único</li>
+                            <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía completa</li>
+                            <li><i class="fas fa-video text-[var(--accent)] mr-2"></i> Video especial</li>
+                            <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
+                            <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
+                            <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes emotivos</li>
+                            <li><i class="fas fa-microphone text-[var(--accent)] mr-2"></i> Grabaciones de voz</li>
+                            <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
+                            <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum completo</li>
+                            <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase única</li>
+                            <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
+                            <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
+                            <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                        </ul>
+                        <p class="price mt-4 text-xl"><span class="price-old">S/ 300</span> <span class="price-new">S/ 150</span></p>
+                        <div class="mt-4">
+                            <p class="text-[var(--accent)] font-semibold">¡Incluye placa de mármol QR de regalo!</p>
+                            <img src="placa-marmol.jpg" alt="Placa de Mármol" class="plan-img mx-auto mt-2" data-fullsrc="placa-marmol.jpg">
+                        </div>
+                        <div class="flex justify-center gap-4 mt-6">
+                            <button class="btn-cta select-plan" data-plan="Legado Infinito - S/ 150"><i class="fas fa-star mr-2"></i> ¡Elige Este!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="text-center mt-4 text-lg" id="countdown">⏳ ¡Oferta válida hasta el 15 de abril!</p>
+        </div>
+    </section>
+
+    <!-- Modal de Pago -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content" data-aos="fade-up">
+            <span class="close-btn" id="close-payment">×</span>
+            <h2 class="text-2xl font-bold text-[var(--accent)] mb-4">¡Crea su Portal Ahora!</h2>
+            <p class="mb-4">Dinos tu nombre para asegurar tu descuento.</p>
+            <input type="text" id="clientName" placeholder="Tu nombre" class="w-full p-3 mb-4 bg-gray-800 border-[var(--accent)] text-white rounded-lg">
+            <p class="mb-4 text-sm">Plan seleccionado: <span id="selected-plan-text" class="text-[var(--accent)] font-bold"></span></p>
+            <div class="text-center">
+                <img src="qr-pago.jpg" alt="QR de Pago" class="w-48 mx-auto mb-4 border-[var(--accent)] rounded-lg">
+                <p class="mb-4 text-sm">Escanea el QR, paga y envía el comprobante por WhatsApp.</p>
+                <button id="send-whatsapp" class="btn-cta"><i class="fas fa-paper-plane mr-2"></i> Confirma tu Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Imagen -->
+    <div class="image-modal" id="image-modal">
+        <span class="close-btn" id="close-image">×</span>
+        <img class="image-modal-content" id="modal-image" src="" alt="Imagen ampliada">
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--text-dark)] text-white py-6">
+        <div class="container">
+            <p>© 2025 Eterna Conexión - Perú. Creado con <i class="fas fa-heart text-[var(--accent)]"></i> por <a href="https://manguitopmd.github.io/biolink/" target="_blank" class="text-[var(--accent)] hover:underline">Manguito PMD</a>.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: true });
+
+        // Acordeón
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const content = header.nextElementSibling;
+                const toggle = header.querySelector('.toggle-btn');
+                const isActive = content.style.maxHeight;
+
+                document.querySelectorAll('.accordion-content').forEach(item => {
+                    item.style.maxHeight = null;
+                    item.previousElementSibling.querySelector('.toggle-btn').textContent = '+';
+                    item.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    content.style.maxHeight = content.scrollHeight + 'px'; // Sin margen extra
+                    toggle.textContent = '−';
+                    content.classList.add('active');
+                }
+            });
+        });
+
+        // Modal de Pago
+        let selectedPlan = null;
+        document.querySelectorAll('.select-plan').forEach(button => {
+            button.addEventListener('click', () => {
+                selectedPlan = button.getAttribute('data-plan');
+                document.getElementById('selected-plan-text').textContent = selectedPlan;
+                document.getElementById('payment-modal').style.display = 'flex';
+            });
+        });
+
+        // WhatsApp
+        document.getElementById('send-whatsapp').addEventListener('click', () => {
+            const clientName = document.getElementById('clientName').value;
+            if (!clientName) {
+                alert('¡Ingresa tu nombre para continuar!');
+                return;
+            }
+
+            const message = `¡Hola Eterna Conexión! 👋\n\n` +
+                           `*Solicitud de Portal Memorial:*\n` +
+                           `- Nombre: ${clientName}\n` +
+                           `- Plan: ${selectedPlan}\n\n` +
+                           `Ya hice el pago con el 50% OFF. ¡Adjunto el comprobante!`;
+            window.open(`https://wa.me/51961360935?text=${encodeURIComponent(message)}`, '_blank');
+            document.getElementById('payment-modal').style.display = 'none';
+        });
+
+        // Cerrar Modal de Pago
+        document.getElementById('payment-modal').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                e.currentTarget.style.display = 'none';
+            }
+        });
+        document.getElementById('close-payment').addEventListener('click', () => {
+            document.getElementById('payment-modal').style.display = 'none';
+        });
+
+        // Modal de Imagen
+        const imageModal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        document.querySelectorAll('.plan-img').forEach(img => {
+            img.addEventListener('click', () => {
+                modalImage.src = img.getAttribute('data-fullsrc');
+                imageModal.style.display = 'flex';
+            });
+        });
+
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                imageModal.style.display = 'none';
+            }
+        });
+        document.getElementById('close-image').addEventListener('click', () => {
+            imageModal.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

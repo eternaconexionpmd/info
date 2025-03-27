@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Eterna Conexión - Crea un portal digital para recordar a tus seres queridos y mascotas con un QR especial.">
+    <meta name="keywords" content="homenaje digital, QR, recuerdos, memorial, mascotas, Eterna Conexión">
+    <title>Eterna Conexión - Recuerda Siempre</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <style>
+        :root {
+            --bg-light: #FDF8F2; /* Fondo suave y cálido */
+            --text-dark: #3A2E2E; /* Marrón oscuro elegante */
+            --accent: #8C552F; /* Tono cálido para detalles */
+            --button-bg: #5A3A2A; /* Botón cálido y sobrio */
+            --button-hover: #A66A3F; /* Hover más vibrante */
+            --card-bg: rgba(255, 250, 245, 0.95); /* Fondo sutil para tarjetas */
+            --shadow: rgba(0, 0, 0, 0.15);
+            --promo-color: #D9534F; /* Color promocional cálido */
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        h1 { font-size: 2.5rem; line-height: 1.1; }
+        h2 { font-size: 2rem; }
+        @media (min-width: 768px) {
+            h1 { font-size: 3.75rem; }
+            h2 { font-size: 2.5rem; }
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(140, 85, 47, 0.3); }
+            50% { box-shadow: 0 0 20px rgba(140, 85, 47, 0.5); }
+        }
+
+        .fade-in { animation: fadeInUp 1.2s ease forwards; }
+        .glow { animation: glow 2s infinite ease-in-out; }
+
+        /* Contenedor */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Secciones */
+        .section {
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--bg-light);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5;
+            z-index: 1;
+            filter: blur(2px);
+        }
+
+        .hero::before { background-image: url('fondo-hero.jpg'); }
+        .features::before { background-image: url('fondo-features.jpg'); }
+        .pets::before { background-image: url('fondo-pets.jpg'); }
+        .demo::before { background-image: url('fondo-demo.jpg'); }
+        .cta::before { background-image: url('fondo-cta.jpg'); }
+
+        /* Botón CTA */
+        .btn-cta {
+            background: var(--button-bg);
+            color: #FFF;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cta:hover {
+            background: var(--button-hover);
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        /* Hero */
+        .hero-logo {
+            max-width: 320px;
+            height: auto;
+            margin: 0 auto 2rem;
+            filter: drop-shadow(0 5px 10px var(--shadow));
+        }
+
+        .hero-img {
+            max-width: 600px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px var(--shadow);
+            margin: 2rem auto;
+        }
+
+        .promo-banner {
+            background: var(--promo-color);
+            color: #FFF;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            display: inline-block;
+            margin: 1.5rem 0;
+        }
+
+        /* Features y Pets */
+        .features-grid, .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card, .pet-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover, .pet-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card i, .pet-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Demo */
+        .demo-img {
+            max-width: 700px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px var(--shadow);
+            margin: 2rem auto;
+        }
+
+        /* CTA */
+        .cta-img {
+            max-width: 450px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px var(--shadow);
+            margin: 2rem auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: #FFF;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section { padding: 3rem 0; }
+            .container { padding: 1.5rem; }
+            .btn-cta { width: 100%; padding: 1rem; }
+            .hero-logo { max-width: 250px; }
+            .hero-img, .demo-img, .cta-img { max-width: 100%; }
+            .features-grid, .pets-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section: Bienvenida Simple -->
+    <section class="section hero">
+        <div class="container" data-aos="fade-up">
+            <img src="logo-eterna-conexion.png" alt="Logo de Eterna Conexión" class="hero-logo fade-in">
+            <h1 class="font-bold mb-6 fade-in">Guarda sus recuerdos para siempre</h1>
+            <p class="max-w-2xl mx-auto mb-6">Un portal digital fácil de usar para recordar a quienes ya no están, con un QR especial.</p>
+            <img src="hero-recuerdos.jpg" alt="Familia recordando momentos" class="hero-img fade-in">
+            <div class="promo-banner fade-in" data-aos="fade-up" data-aos-delay="200">
+                🎉 ¡50% OFF solo hasta el 15 de abril!
+            </div>
+            <a href="planes.html" class="btn-cta fade-in" aria-label="Crea tu portal memorial ahora" data-aos="fade-up" data-aos-delay="400"><i class="fas fa-heart mr-2"></i> Empieza Hoy</a>
+        </div>
+    </section>
+
+    <!-- Features Section: Usos Principales -->
+    <section class="section features">
+        <div class="container" data-aos="fade-up">
+            <h2 class="font-bold mb-6">Un recuerdo para cada momento</h2>
+            <p class="max-w-2xl mx-auto mb-6">Usa este portal para homenajear a tus seres queridos de muchas formas:</p>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-church"></i>
+                    <h3 class="text-xl font-semibold mb-2">Misas y Recuerdos</h3>
+                    <p>Entrega llaveros con QR en misas para que todos vean su portal.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-envelope"></i>
+                    <h3 class="text-xl font-semibold mb-2">Invitaciones</h3>
+                    <p>Invita a misas o eventos con un QR que lleva a su homenaje.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3 class="text-xl font-semibold mb-2">Onomásticos</h3>
+                    <p>Celebra su día especial con un portal lleno de recuerdos.</p>
+                </div>
+            </div>
+            <a href="planes.html" class="btn-cta fade-in mt-6" aria-label="Crea tu portal ahora" data-aos="fade-up" data-aos-delay="500"><i class="fas fa-arrow-right mr-2"></i> Hazlo Ahora</a>
+        </div>
+    </section>
+
+    <!-- Pets Section: Mascotas -->
+    <section class="section pets">
+        <div class="container" data-aos="fade-up">
+            <h2 class="font-bold mb-6">Un lugar para tus mascotas</h2>
+            <p class="max-w-2xl mx-auto mb-6">Guarda los recuerdos de tus fieles amigos que ya no están:</p>
+            <div class="pets-grid">
+                <div class="pet-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-paw"></i>
+                    <h3 class="text-xl font-semibold mb-2">Fotos y Videos</h3>
+                    <p>Guarda sus momentos más felices en un portal especial.</p>
+                </div>
+                <div class="pet-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-heart"></i>
+                    <h3 class="text-xl font-semibold mb-2">Homenaje</h3>
+                    <p>Un espacio para recordar su amor incondicional.</p>
+                </div>
+                <div class="pet-card" data-aos="fade-up" data-aos-delay="400">
+                    <i class="fas fa-qrcode"></i>
+                    <h3 class="text-xl font-semibold mb-2">QR Fácil</h3>
+                    <p>Comparte su portal con un QR sencillo de escanear.</p>
+                </div>
+            </div>
+            <a href="planes.html" class="btn-cta fade-in mt-6" aria-label="Crea un homenaje para tu mascota" data-aos="fade-up" data-aos-delay="500"><i class="fas fa-paw mr-2"></i> Recuerda a tu Mascota</a>
+        </div>
+    </section>
+
+    <!-- Demo Section: Vista Previa -->
+    <section class="section demo">
+        <div class="container" data-aos="fade-up">
+            <h2 class="font-bold mb-6">Mira cómo funciona</h2>
+            <p class="max-w-2xl mx-auto mb-6">Un portal sencillo para guardar fotos, videos y más, con un QR para compartir.</p>
+            <img src="portal-demo.jpg" alt="Vista previa del portal digital" class="demo-img fade-in">
+            <a href="https://manguitopmd.github.io/memorias/" target="_blank" class="btn-cta fade-in mt-6" aria-label="Explora una demostración gratuita" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-eye mr-2"></i> Ver Demo</a>
+        </div>
+    </section>
+
+    <!-- CTA Section: Llamado Final -->
+    <section class="section cta">
+        <div class="container" data-aos="fade-up">
+            <h2 class="font-bold mb-6">No dejes que se olviden</h2>
+            <p class="max-w-2xl mx-auto mb-6">Crea un portal para tus seres queridos o mascotas. Incluye un QR de regalo, como llaveros para misas. ¡50% OFF hasta el 15 de abril!</p>
+            <img src="velas-recuerdo.jpg" alt="Velas en memoria" class="cta-img fade-in">
+            <a href="planes.html" class="btn-cta fade-in mt-6 glow" aria-label="Crea su portal hoy" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-heart mr-2"></i> Crea su Portal</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>© 2025 Eterna Conexión - Perú. Creado con <i class="fas fa-heart text-[var(--accent)]"></i> por <a href="https://manguitopmd.github.io/biolink/" target="_blank" class="text-[var(--accent)] hover:underline">Manguito PMD</a>.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: true });
+    </script>
+</body>
+</html>
