@@ -95,6 +95,7 @@
         .features::before { background-image: url('fondo-features.jpg'); }
         .pets::before { background-image: url('fondo-pets.jpg'); }
         .demo::before { background-image: url('fondo-demo.jpg'); }
+        .gifts::before { background-image: url('fondo-gifts.jpg'); } /* Fondo sugerido para la nueva sección */
         .cta::before { background-image: url('fondo-cta.jpg'); }
 
         /* Botón CTA */
@@ -145,14 +146,14 @@
         }
 
         /* Features y Pets */
-        .features-grid, .pets-grid {
+        .features-grid, .pets-grid, .gifts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 2rem;
             margin: 3rem 0;
         }
 
-        .feature-card, .pet-card {
+        .feature-card, .pet-card, .gift-card {
             background: var(--card-bg);
             padding: 2rem;
             border-radius: 12px;
@@ -160,13 +161,22 @@
             transition: transform 0.3s ease;
         }
 
-        .feature-card:hover, .pet-card:hover {
+        .feature-card:hover, .pet-card:hover, .gift-card:hover {
             transform: translateY(-5px);
         }
 
         .feature-card i, .pet-card i {
             font-size: 2rem;
             color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Nueva Sección de Regalos */
+        .gift-img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
             margin-bottom: 1rem;
         }
 
@@ -202,8 +212,8 @@
             .container { padding: 1.5rem; }
             .btn-cta { width: 100%; padding: 1rem; }
             .hero-logo { max-width: 250px; }
-            .hero-img, .demo-img, .cta-img { max-width: 100%; }
-            .features-grid, .pets-grid { grid-template-columns: 1fr; }
+            .hero-img, .demo-img, .cta-img, .gift-img { max-width: 100%; }
+            .features-grid, .pets-grid, .gifts-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -284,6 +294,38 @@
         </div>
     </section>
 
+    <!-- Gifts Section: Lo que Recibirás -->
+    <section class="section gifts">
+        <div class="container" data-aos="fade-up">
+            <h2 class="font-bold mb-6">Lo que recibirás con tu plan</h2>
+            <p class="max-w-2xl mx-auto mb-6">Cada plan incluye un regalo único con QR para mantener viva su memoria:</p>
+            <div class="gifts-grid">
+                <!-- Llavero Corazón -->
+                <div class="gift-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="llavero-corazon.jpg" alt="Llavero Corazón con QR" class="gift-img mx-auto" data-fullsrc="llavero-corazon.jpg">
+                    <h3 class="text-xl font-semibold mb-2">Llavero Corazón</h3>
+                    <p class="text-sm">Dos llaveros con el QR en un lado y la foto de tu ser querido en el otro.</p>
+                    <p class="text-sm mt-2 italic text-[var(--accent)]">Idea de uso: Llévalo en tus llaves o compártelo en misas como un recuerdo portátil.</p>
+                </div>
+                <!-- Placa Metálica -->
+                <div class="gift-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="placa-metalica.jpg" alt="Placa Metálica con QR" class="gift-img mx-auto" data-fullsrc="placa-metalica.jpg">
+                    <h3 class="text-xl font-semibold mb-2">Placa Metálica</h3>
+                    <p class="text-sm">Una placa elegante con la foto del homenajeado y el QR.</p>
+                    <p class="text-sm mt-2 italic text-[var(--accent)]">Idea de uso: Colócala en un altar o repisa como un tributo duradero.</p>
+                </div>
+                <!-- Placa de Mármol -->
+                <div class="gift-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="placa-marmol.jpg" alt="Placa de Mármol con QR" class="gift-img mx-auto" data-fullsrc="placa-marmol.jpg">
+                    <h3 class="text-xl font-semibold mb-2">Placa de Mármol</h3>
+                    <p class="text-sm">Una placa sofisticada de mármol con foto y QR.</p>
+                    <p class="text-sm mt-2 italic text-[var(--accent)]">Idea de uso: Decora una mesa, altar o jardín con un homenaje eterno.</p>
+                </div>
+            </div>
+            <a href="planes.html" class="btn-cta fade-in mt-6" aria-label="Elige tu plan ahora" data-aos="fade-up" data-aos-delay="500"><i class="fas fa-arrow-right mr-2"></i> Elige tu Plan</a>
+        </div>
+    </section>
+
     <!-- CTA Section: Llamado Final -->
     <section class="section cta">
         <div class="container" data-aos="fade-up">
@@ -301,10 +343,71 @@
         </div>
     </footer>
 
+    <!-- Modal de Imagen -->
+    <div class="image-modal" id="image-modal">
+        <span class="close-btn" id="close-image">×</span>
+        <img class="image-modal-content" id="modal-image" src="" alt="Imagen ampliada">
+    </div>
+
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1200, once: true });
+
+        // Modal de Imagen
+        const imageModal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        document.querySelectorAll('.gift-img').forEach(img => {
+            img.addEventListener('click', () => {
+                modalImage.src = img.getAttribute('data-fullsrc');
+                imageModal.style.display = 'flex';
+            });
+        });
+
+        imageModal.addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                imageModal.style.display = 'none';
+            }
+        });
+        document.getElementById('close-image').addEventListener('click', () => {
+            imageModal.style.display = 'none';
+        });
     </script>
+    <style>
+        /* Estilos para el Modal de Imagen */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 2rem;
+            color: #FFF;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: var(--accent);
+        }
+    </style>
 </body>
 </html>
