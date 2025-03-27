@@ -138,16 +138,18 @@
             box-shadow: 0 10px 20px var(--shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             margin-bottom: 2rem;
+            border: 2px solid transparent;
         }
 
         .plan-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px var(--shadow);
+            border-color: var(--accent);
         }
 
         /* Imágenes de Planes */
         .plan-img {
-            width: 180px; /* Mayor tamaño para destacar */
+            width: 180px;
             border-radius: 10px;
             box-shadow: 0 5px 15px var(--shadow);
             transition: transform 0.3s ease;
@@ -168,7 +170,19 @@
         .price-new {
             color: var(--promo-color);
             font-weight: bold;
-            font-size: 1.75rem; /* Más grande para impacto */
+            font-size: 1.75rem;
+        }
+
+        /* Lista de características */
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-list .not-included {
+            text-decoration: line-through;
+            color: #999;
         }
 
         /* Modal de Pago */
@@ -280,14 +294,15 @@
     <section class="section plans">
         <div class="container" data-aos="fade-up">
             <h2 class="font-bold mb-6">Escoge cómo recordarlos</h2>
-            <p class="max-w-2xl mx-auto mb-8 text-lg">Todos los planes incluyen un QR de regalo. ¡Aprovecha el 50% OFF hasta el 15 de abril!</p>
+            <p class="max-w-2xl mx-auto mb-4 text-lg">Todos los planes incluyen un QR de regalo. ¡Aprovecha el 50% OFF hasta el 15 de abril!</p>
+            <a href="https://manguitopmd.github.io/memorias/" target="_blank" class="btn-cta mb-8"><i class="fas fa-eye mr-2"></i> Ver Ejemplo</a>
 
             <div class="plans-grid">
                 <!-- Plan Huella Eterna -->
                 <div class="plan-card" data-aos="fade-up" data-aos-delay="100">
                     <h3 class="font-semibold mb-4">Huella Eterna</h3>
-                    <p class="mb-4 text-lg">Un espacio digital simple y bonito para mantener sus recuerdos.</p>
-                    <ul class="text-left space-y-2 mb-6">
+                    <p class="mb-4 text-lg">Un espacio digital simple y bonito.</p>
+                    <ul class="feature-list text-left mb-6">
                         <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
                         <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía corta</li>
                         <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
@@ -297,6 +312,12 @@
                         <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase especial</li>
                         <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
                         <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                        <li class="not-included"><i class="fas fa-trophy text-[#999] mr-2"></i> Epítetos especiales</li>
+                        <li class="not-included"><i class="fas fa-photo-video text-[#999] mr-2"></i> Álbum detallado</li>
+                        <li class="not-included"><i class="fas fa-headphones text-[#999] mr-2"></i> Melodía personalizada</li>
+                        <li class="not-included"><i class="fas fa-video text-[#999] mr-2"></i> Video homenaje</li>
+                        <li class="not-included"><i class="fas fa-microphone text-[#999] mr-2"></i> Grabaciones de voz</li>
+                        <li class="not-included"><i class="fas fa-film text-[#999] mr-2"></i> Videos personales</li>
                     </ul>
                     <p class="price mb-4"><span class="price-old">S/ 100</span> <span class="price-new">S/ 50</span></p>
                     <div class="mb-6">
@@ -304,7 +325,6 @@
                         <img src="llavero-corazon.jpg" alt="Llavero en forma de corazón" class="plan-img mx-auto mt-2" data-fullsrc="llavero-corazon.jpg">
                     </div>
                     <div class="flex justify-center gap-4">
-                        <a href="https://manguitopmd.github.io/memorias/" target="_blank" class="btn-cta"><i class="fas fa-eye mr-2"></i> Ver Ejemplo</a>
                         <button class="btn-cta select-plan" data-plan="Huella Eterna - S/ 50"><i class="fas fa-heart mr-2"></i> ¡Elige Este!</button>
                     </div>
                 </div>
@@ -312,20 +332,23 @@
                 <!-- Plan Memorias Eternas -->
                 <div class="plan-card" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="font-semibold mb-4">Memorias Eternas</h3>
-                    <p class="mb-4 text-lg">Un homenaje más completo para sus recuerdos especiales.</p>
-                    <ul class="text-left space-y-2 mb-6">
+                    <p class="mb-4 text-lg">Un homenaje más completo.</p>
+                    <ul class="feature-list text-left mb-6">
                         <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
-                        <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Título especial</li>
                         <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía completa</li>
                         <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
                         <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
                         <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes del corazón</li>
                         <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
-                        <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum detallado</li>
                         <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase significativa</li>
                         <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
-                        <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
                         <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                        <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Epítetos especiales</li>
+                        <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum detallado</li>
+                        <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
+                        <li class="not-included"><i class="fas fa-video text-[#999] mr-2"></i> Video homenaje</li>
+                        <li class="not-included"><i class="fas fa-microphone text-[#999] mr-2"></i> Grabaciones de voz</li>
+                        <li class="not-included"><i class="fas fa-film text-[#999] mr-2"></i> Videos personales</li>
                     </ul>
                     <p class="price mb-4"><span class="price-old">S/ 140</span> <span class="price-new">S/ 70</span></p>
                     <div class="mb-6">
@@ -340,22 +363,23 @@
                 <!-- Plan Legado Infinito -->
                 <div class="plan-card" data-aos="fade-up" data-aos-delay="300">
                     <h3 class="font-semibold mb-4">Legado Infinito</h3>
-                    <p class="mb-4 text-lg">El homenaje más completo, con su voz y más recuerdos.</p>
-                    <ul class="text-left space-y-2 mb-6">
+                    <p class="mb-4 text-lg">El homenaje más completo.</p>
+                    <ul class="feature-list text-left mb-6">
                         <li><i class="fas fa-portrait text-[var(--accent)] mr-2"></i> Foto y nombre</li>
-                        <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Título único</li>
                         <li><i class="fas fa-book text-[var(--accent)] mr-2"></i> Biografía completa</li>
-                        <li><i class="fas fa-video text-[var(--accent)] mr-2"></i> Video especial</li>
                         <li><i class="fas fa-music text-[var(--accent)] mr-2"></i> Canción favorita</li>
                         <li><i class="fas fa-images text-[var(--accent)] mr-2"></i> Carrusel de fotos</li>
                         <li><i class="fas fa-heart text-[var(--accent)] mr-2"></i> Mensajes emotivos</li>
-                        <li><i class="fas fa-microphone text-[var(--accent)] mr-2"></i> Grabaciones de voz</li>
                         <li><i class="fas fa-clock text-[var(--accent)] mr-2"></i> Contador de tiempo</li>
-                        <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum completo</li>
                         <li><i class="fas fa-star text-[var(--accent)] mr-2"></i> Frase única</li>
                         <li><i class="fas fa-comment text-[var(--accent)] mr-2"></i> Lema inspirador</li>
-                        <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
                         <li><i class="fas fa-qrcode text-[var(--accent)] mr-2"></i> QR digital</li>
+                        <li><i class="fas fa-trophy text-[var(--accent)] mr-2"></i> Epítetos especiales</li>
+                        <li><i class="fas fa-photo-video text-[var(--accent)] mr-2"></i> Álbum completo</li>
+                        <li><i class="fas fa-headphones text-[var(--accent)] mr-2"></i> Melodía personalizada</li>
+                        <li><i class="fas fa-video text-[var(--accent)] mr-2"></i> Video homenaje</li>
+                        <li><i class="fas fa-microphone text-[var(--accent)] mr-2"></i> Grabaciones de voz</li>
+                        <li><i class="fas fa-film text-[var(--accent)] mr-2"></i> Videos personales</li>
                     </ul>
                     <p class="price mb-4"><span class="price-old">S/ 300</span> <span class="price-new">S/ 150</span></p>
                     <div class="mb-6">
